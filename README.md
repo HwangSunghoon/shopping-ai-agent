@@ -3,6 +3,14 @@
 자연어 쇼핑 검색, 추천, 조건 누적형 후속 탐색을 지원하는 쇼핑 검색 MVP입니다.  
 단순 챗봇 데모가 아니라, 실제 쇼핑몰 검색 화면처럼 상품 탐색이 먼저 보이고 AI는 추천을 보조하는 구조를 목표로 합니다.
 
+## System Architecture
+
+![Shopping AI Agent Architecture](docs/images/shopping-ai-agent-architecture.png)
+
+이 프로젝트는 Next.js 기반 프론트엔드, FastAPI 기반 백엔드, Naver Shopping API, LLM API, 추천 서비스, Reranker, SQLite DB로 구성됩니다.
+
+사용자가 자연어로 쇼핑 조건을 입력하면 프론트엔드가 백엔드의 `/api/agent/search`를 호출하고, 백엔드는 LLM과 규칙 기반 로직을 통해 검색 조건을 추출합니다. 이후 Naver Shopping API에서 상품 후보를 수집하고, Recommendation Service와 Reranker가 가격, 리뷰, 배송, 선호도, 대화 문맥을 반영해 상품을 재정렬합니다. 최종 결과는 상품 카드, 추천 요약, 검색 히스토리 형태로 프론트엔드에 표시됩니다.
+
 ## 프로젝트 개요
 
 사용자는 다음과 같은 자연어를 검색창에 입력할 수 있습니다.
